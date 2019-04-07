@@ -115,6 +115,19 @@ function collectNewTypeDefinitions(
     })
   }
 
+  if (newDefinition.kind === 'InputUnionTypeDefinition') {
+    newDefinition.types.forEach(type => {
+      if (!definitionPool.some(d => d.name.value === type.name.value)) {
+        const typeName = type.name.value
+        const typeMatch = schemaMap[typeName]
+        if (!typeMatch) {
+          throw new Error(`Couldn't find type ${typeName} in any of the schemas.`)
+        }
+        newTypeDefinitions.push(schemaMap[type.name.value])
+      }
+    })
+  }
+
   if (newDefinition.kind === 'ObjectTypeDefinition') {
     // collect missing interfaces
     newDefinition.interfaces.forEach(int => {

@@ -292,7 +292,7 @@ function filterImportedDefinitions(
       )
       return typeDefinitions.filter(
         typeDef =>
-          typeDef.kind === 'ObjectTypeDefinition' &&
+          typeDef.kind === 'ObjectTypeDefinition' || typeDef.kind === 'InputUnionTypeDefinition'  &&
           previousTypeDefinitions[typeDef.name.value],
       ) as ObjectTypeDefinitionNode[]
     }
@@ -336,6 +336,7 @@ function filterTypeDefinitions(
     'EnumTypeDefinition',
     'UnionTypeDefinition',
     'InputObjectTypeDefinition',
+    'InputUnionTypeDefinition',
   ]
   return definitions
     .filter(d => includes(validKinds, d.kind))
