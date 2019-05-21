@@ -12,9 +12,6 @@
   "typescript": {
     "definition": "dist/index.d.ts"
   },
-  "resolutions": {
-    "graphql": "../graphql-js/dist"
-  },
   "nyc": {
     "extension": [".ts"],
     "require": ["ts-node/register"],
